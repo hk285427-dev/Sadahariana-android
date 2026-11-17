@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sadahariana – Hariana ki dukaanein</title>
+<meta name="theme-color" content="#0f3d2e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Mukta:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f3ea;--card:#fffefb;--ink:#1c1a15;--mute:#6f6752;--line:#e2d6b5;--green:#0f3d2e;--onGreen:#f6ecd0;--gold:#9a7522;--brick:#a23b2b;--head:#0f3d2e;--onHead:#f6ecd0;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e0d0a;--card:#171510;--ink:#f1e8cf;--mute:#a89e82;--line:#34301f;--green:#d6b25e;--onGreen:#14110a;--gold:#d6b25e;--brick:#e58a78;--head:#0a0906;--onHead:#e9d9a8}}
+:root[data-theme="dark"]{--bg:#0e0d0a;--card:#171510;--ink:#f1e8cf;--mute:#a89e82;--line:#34301f;--green:#d6b25e;--onGreen:#14110a;--gold:#d6b25e;--brick:#e58a78;--head:#0a0906;--onHead:#e9d9a8}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Mukta","Noto Sans Devanagari",system-ui,sans-serif;font-size:16px;line-height:1.5}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;margin:0;line-height:1.15}
+.top{background:var(--head);color:var(--onHead);padding:40px 16px 34px;text-align:center;border-bottom:1px solid #c9a24a;box-shadow:inset 0 -5px 0 var(--head),inset 0 -6px 0 #c9a24a55}
+.top h1{font-size:52px;font-weight:600;letter-spacing:.08em}
+.top p{margin:8px 0 0;opacity:.85;letter-spacing:.06em;font-size:15px}
+.wrap{max-width:760px;margin:0 auto;padding:0 14px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:12px 0 8px;z-index:5}
+input[type=search],input[type=text],textarea{width:100%;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:4px;padding:12px 14px}
+input:focus,textarea:focus,button:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:1px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:10px 0 4px}
+.chip{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 14px;font:inherit;cursor:pointer}
+.chip.on{background:var(--green);border-color:var(--green);color:var(--onGreen)}
+.row{display:flex;align-items:center;gap:8px;color:var(--mute);margin-top:6px}
+.shop{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:22px 20px;margin:20px 0;box-shadow:0 0 0 4px var(--bg),0 0 0 5px var(--line)}
+.shop h2{font-size:28px;font-weight:700}
+.meta{color:var(--mute);font-size:15px;margin:2px 0}
+.tag{display:inline-block;border:1px solid var(--gold);color:var(--gold);border-radius:2px;padding:0 8px;font-family:"Mukta",system-ui,sans-serif;font-size:13px;letter-spacing:.04em;margin-left:8px;vertical-align:middle}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.btn{font:inherit;font-weight:600;letter-spacing:.03em;border:1px solid var(--green);background:transparent;color:var(--green);border-radius:2px;padding:9px 18px;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.fill{background:var(--green);color:var(--onGreen)}
+.empty{text-align:center;color:var(--mute);padding:40px 10px}
+#sheet{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:flex-end;justify-content:center;z-index:20}
+#sheet.open{display:flex}
+.panel{background:var(--bg);width:100%;max-width:560px;max-height:92%;overflow-y:auto;border-radius:18px 18px 0 0;padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px))}
+.item{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 0;border-bottom:1px dashed var(--line)}
+.qty{display:flex;align-items:center;gap:10px}
+.qty button{width:34px;height:34px;border-radius:50%;border:2px solid var(--green);background:var(--card);color:var(--green);font-size:20px;line-height:1;cursor:pointer}
+.sum{display:flex;justify-content:space-between;padding:4px 0}
+.tot{font-weight:600;font-size:18px;border-top:2px solid var(--ink);margin-top:6px;padding-top:8px}
+.note{color:var(--brick);font-size:14px;margin:8px 0}
+label{display:block;font-weight:600;margin:10px 0 4px}
+.x{float:right;background:none;border:none;color:var(--ink);font-size:28px;cursor:pointer}
+.pays{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+footer{text-align:center;color:var(--mute);font-size:14px;padding:24px 10px 30px}
+
+#adminAccess{margin-top:10px}
+#adminAccess button{font:inherit;border:1px solid var(--gold);background:transparent;color:var(--gold);padding:7px 14px;border-radius:3px}
+#adminBox{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;z-index:40;padding:12px}
+#adminBox.open{display:flex}
+#adminPanel{background:var(--bg);color:var(--ink);width:100%;max-width:620px;max-height:94%;overflow:auto;border:1px solid var(--line);border-radius:10px;padding:16px}
+#adminPanel input,#adminPanel select{width:100%;font:inherit;padding:9px;margin:4px 0 8px;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:4px}
+#adminPanel .adminGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#adminPanel .adminActions{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+#adminPanel .adminShop{border:1px solid var(--line);padding:10px;margin:8px 0;border-radius:4px}
+#adminPanel button{font:inherit;padding:7px 12px;border:1px solid var(--green);background:transparent;color:var(--green);border-radius:3px}
+#adminPanel button.primary{background:var(--green);color:var(--onGreen)}
+#adminMsg{color:var(--brick);font-size:14px;min-height:20px}
+@media(max-width:420px){#adminPanel .adminGrid{grid-template-columns:1fr}}
+
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <h1 id="appName"></h1>
+  <p id="tagline"></p>
+</div></header>
+
+<main class="wrap">
+  <div class="bar">
+    <input type="search" id="q" placeholder="Dukaan ya cheez dhoondho (jaise: samosa, dawai)" aria-label="Search">
+    <div class="chips" id="chips"></div>
+    <label class="row" style="margin:4px 0 0;font-weight:400"><input type="checkbox" id="delOnly"> Sirf home delivery wali dukaanein</label>
+  </div>
+  <div id="list"></div>
+</main>
+
+<footer id="foot"></footer>
+<div id="adminAccess" style="text-align:center;padding:0 10px 22px">
+  <button type="button" id="openAdmin">Admin Login</button>
+</div>
+<div id="adminBox" role="dialog" aria-modal="true">
+  <section id="adminPanel"></section>
+</div>
+
+<div id="sheet" role="dialog" aria-modal="true"><div class="panel" id="panel"></div></div>
+
+<script>
+/* Supabase cloud database connection */
+const SUPABASE_URL = "https://plrpxcfpgnekuiepdrya.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_XZB3I4lIpJW9wzGrcqb_Qw_UoQvTfdw";
+const db = window.supabase?.createClient ? window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY) : null;
+let adminEditingId = null;
+
+function shopFromDb(r){
+  const cfg = DELIVERY[r.category] || {};
+  return {
+    id:r.id, name:r.name||"", cat:r.category||"", area:r.area||"", addr:r.address||"",
+    timing:r.timing||"", phone:r.phone||"", upi:r.upi||UPI_DEFAULT,
+    delivery:!!r.delivery, ...(r.delivery?cfg:{}), menu:r.delivery?(cfg.menu||[]):[]
+  };
+}
+async function loadCloudShops(){
+  // If Supabase is unavailable, keep the locally configured shop list visible.
+  if(!db){ render(); return; }
+  try{
+    const {data,error}=await db.from("shops").select("*").order("name");
+    if(error) throw error;
+    if(data && data.length){
+      SHOPS=data.map(shopFromDb);
+    }else{
+      // An empty cloud table should not blank the original locally configured directory.
+      // Keep the existing SHOPS array until the first cloud shop is added.
+    }
+    render();
+  }catch(err){
+    console.error("Cloud shops load failed:",err);
+    // Keep the existing local directory visible if cloud loading fails.
+    render();
+  }
+}
+function adminMessage(msg){const el=document.querySelector("#adminMsg");if(el)el.textContent=msg||"";}
+function openAdminBox(){
+  $("#adminBox").classList.add("open");
+  drawAdminLogin();
+}
+function closeAdminBox(){$("#adminBox").classList.remove("open");}
+function drawAdminLogin(){
+  if(!db){ $("#adminPanel").innerHTML=`<button class="x" id="adminClose">×</button><h2>Admin Login</h2><p id="adminMsg">Supabase library load nahi hui. Internet connection check karke page refresh karein.</p>`; $("#adminClose").onclick=closeAdminBox; return; }
+  $("#adminPanel").innerHTML=`<button class="x" id="adminClose" aria-label="Close">×</button>
+    <h2>Admin Login</h2><p class="meta">Sirf authorized admin email se login karein.</p>
+    <label>Email</label><input id="adminEmail" type="email" autocomplete="username" placeholder="Admin email">
+    <label>Password</label><input id="adminPassword" type="password" autocomplete="current-password" placeholder="Password">
+    <div id="adminMsg"></div><div class="adminActions"><button class="primary" id="adminLogin">Login</button></div>`;
+  $("#adminClose").onclick=closeAdminBox;
+  $("#adminLogin").onclick=async()=>{
+    adminMessage("Login ho raha hai...");
+    const email=$("#adminEmail").value.trim(), password=$("#adminPassword").value;
+    try{
+      const {error}=await db.auth.signInWithPassword({email,password});
+      if(error){adminMessage("Login nahi hua: "+error.message);return;}
+      await drawAdminDashboard();
+    }catch(err){adminMessage("Login mein dikkat: "+(err?.message||"Dobara koshish karein."));}
+  };
+}
+async function drawAdminDashboard(){
+  let data, error;
+  try{
+    ({data,error}=await db.from("shops").select("*").order("name"));
+  }catch(err){error=err;}
+  if(error){$("#adminPanel").innerHTML=`<button class="x" id="adminClose">×</button><h2>Admin</h2><p id="adminMsg">Database access error: ${esc(error.message)}</p>`;$("#adminClose").onclick=closeAdminBox;return;}
+  $("#adminPanel").innerHTML=`<button class="x" id="adminClose" aria-label="Close">×</button>
+    <h2>Sadahariana Admin</h2><p class="meta">Cloud par shop details manage karein.</p>
+    <div class="adminActions"><button class="primary" id="newShop">+ Nayi dukaan</button><button id="adminLogout">Logout</button></div>
+    <div id="adminForm"></div><div id="adminMsg"></div><h3 style="margin-top:16px">Dukaanein (${data.length})</h3>
+    <div id="adminShops">${data.map(r=>`<div class="adminShop"><b>${esc(r.name)}</b><div class="meta">${esc(r.category||"")} · ${esc(r.area||"")}</div>
+    <div class="adminActions"><button data-edit="${esc(r.id)}">Edit</button><button data-delete="${esc(r.id)}">Delete</button></div></div>`).join("")||"<p>Abhi koi shop nahi hai.</p>"}</div>`;
+  $("#adminClose").onclick=closeAdminBox;
+  $("#newShop").onclick=()=>drawShopForm();
+  $("#adminLogout").onclick=async()=>{await db.auth.signOut();drawAdminLogin();};
+  document.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>drawShopForm(data.find(x=>String(x.id)===b.dataset.edit)));
+  document.querySelectorAll("[data-delete]").forEach(b=>b.onclick=async()=>{
+    if(!confirm("Kya is dukaan ko delete karna hai?"))return;
+    const {error}=await db.from("shops").delete().eq("id",b.dataset.delete);
+    if(error){adminMessage("Delete error: "+error.message);return;}
+    await loadCloudShops();drawAdminDashboard();
+  });
+}
+function drawShopForm(r=null){
+  adminEditingId=r?r.id:null;
+  const v=(key,def="")=>esc(r?.[key]??def);
+  $("#adminForm").innerHTML=`<h3>${r?"Dukaan edit karein":"Nayi dukaan jodein"}</h3>
+    <label>Dukaan ka naam</label><input id="fName" value="${v("name")}" placeholder="Shop name">
+    <div class="adminGrid"><div><label>Category</label><select id="fCategory">${["Fast Food","Dawai","Kirana","Mithai","Bakery","Kapde","Mobile","Salon","Hardware","Sabzi-Fal","Electronics","Jewellery","Stationery","Jutte","Clinic","Other"].map(c=>`<option ${r?.category===c?"selected":""}>${c}</option>`).join("")}</select></div>
+    <div><label>Area</label><input id="fArea" value="${v("area")}" placeholder="Main Bazaar"></div></div>
+    <label>Address / Landmark</label><input id="fAddress" value="${v("address")}" placeholder="Dukaan ka pata">
+    <div class="adminGrid"><div><label>Phone (91 ke saath)</label><input id="fPhone" value="${v("phone")}" placeholder="9198XXXXXXXX"></div>
+    <div><label>Timing</label><input id="fTiming" value="${v("timing","09:00 – 21:00")}" placeholder="09:00 – 21:00"></div></div>
+    <div class="adminGrid"><div><label>UPI ID</label><input id="fUpi" value="${v("upi")}" placeholder="name@upi"></div>
+    <div><label>Home delivery</label><select id="fDelivery"><option value="false" ${r?.delivery?"":"selected"}>Nahi</option><option value="true" ${r?.delivery?"selected":""}>Haan</option></select></div></div>
+    <div class="adminActions"><button class="primary" id="saveShop">Save</button><button id="cancelShop">Cancel</button></div>`;
+  $("#saveShop").onclick=async()=>{
+    const payload={name:$("#fName").value.trim(),category:$("#fCategory").value,area:$("#fArea").value.trim(),
+      address:$("#fAddress").value.trim(),phone:$("#fPhone").value.trim(),timing:$("#fTiming").value.trim(),
+      upi:$("#fUpi").value.trim(),delivery:$("#fDelivery").value==="true"};
+    if(!payload.name||!payload.phone){adminMessage("Dukaan ka naam aur phone number zaroor bharein.");return;}
+    adminMessage("Save ho raha hai...");
+    const result=adminEditingId
+      ? await db.from("shops").update(payload).eq("id",adminEditingId)
+      : await db.from("shops").insert(payload);
+    if(result.error){adminMessage("Save error: "+result.error.message);return;}
+    await loadCloudShops();drawAdminDashboard();
+  };
+  $("#cancelShop").onclick=drawAdminDashboard;
+}
+$("#openAdmin").onclick=openAdminBox;
+$("#adminBox").onclick=e=>{if(e.target.id==="adminBox")closeAdminBox();};
+
+/* =====================================================
+   YAHAN SE EDIT KARO
+   ===================================================== */
+const APP_NAME  = "Sadahariana";
+const TAGLINE   = "Hariana ki behtareen dukaanein, ab ghar tak";
+const TOWN      = "Hariana";
+const FOOTER    = "Apni dukaan jodne ke liye sampark karein: 98XXXXXXXX";
+const UPI_DEFAULT = "yourname@upi";   // <-- apni asli UPI ID yahan likho (har dukaan ki alag bhi ho sakti hai)
+
+/* Home delivery sirf in categories ko milti hai. Kam/zyada karne ke liye yahan badlo. */
+const DELIVERY = {
+ "Fast Food":{fee:20,min:100,menu:[["Samosa (2 pcs)",30],["Chowmein",70],["Burger",50],["Momos (8 pcs)",80],["Paneer Roll",60],["Cold drink",20]]},
+ "Dawai":{fee:20,min:50,menu:[["Paracetamol strip",25],["ORS packet",20],["Cough syrup",85],["Band-aid pack",30],["Digital thermometer",150],["Vicks 25g",75]]},
+ "Kirana":{fee:30,min:200,menu:[["Aata 5 kg",230],["Chawal 1 kg",85],["Cheeni 1 kg",48],["Sarson tel 1 L",150],["Chai patti 250g",110],["Dal 1 kg",120]]}
+};
+
+/* Dukaan: [naam, category, area, pata, timing]. Naya jodne ke liye ek line copy karo. Phone number auto-demo hain. */
+const D="09:00 – 21:00", N="08:00 – 23:00", M="11:00 – 22:00", S="10:00 – 20:00";
+const RAW = [
+["Sharma Fast Food","Fast Food","Main Bazaar","Bus stand ke saamne",M],
+["Tandoori Tadka","Fast Food","Station Road","Railway phatak ke paas",M],
+["Momo Point","Fast Food","Bazaar Chowk","Chowk ke dayen taraf",M],
+["Burger Hub","Fast Food","Model Town","Park ke saamne",M],
+["Punjabi Dhaba","Fast Food","GT Road","Petrol pump ke paas","10:00 – 23:00"],
+["Roll Express","Fast Food","Civil Lines","School ke saamne",M],
+["Mehta Medical Store","Dawai","Hospital Road","Civil hospital ke paas",N],
+["Jeevan Dawakhana","Dawai","Main Bazaar","Clock tower ke paas",N],
+["Shree Ram Medicos","Dawai","Mandi Road","Mandi gate ke saamne",N],
+["Arogya Pharmacy","Dawai","Model Town","Dispensary ke paas",N],
+["Sanjeevani Medical","Dawai","Station Road","Bus stand ke peeche",N],
+["Care Plus Chemist","Dawai","Bazaar Chowk","Sunar gali ke paas",N],
+["Gupta Kirana Store","Kirana","Purani Mandi","Shiv mandir ke saamne","07:00 – 21:30"],
+["Verma General Store","Kirana","Main Bazaar","Bank ke saamne","07:00 – 21:30"],
+["Aggarwal Karyana","Kirana","Mandi Road","Anaj mandi ke paas","07:00 – 21:00"],
+["Singh Provision Store","Kirana","Model Town","Gali no. 3","07:00 – 22:00"],
+["Kisan Kirana","Kirana","Station Road","Station chowk","07:00 – 21:00"],
+["Bansal Super Mart","Kirana","Civil Lines","School road","07:00 – 22:00"],
+["Raja Daily Needs","Kirana","GT Road","Dhaba ke saamne","06:30 – 22:00"],
+["Balaji Sweets","Mithai","Sabzi Mandi Road","Mandi gate ke paas","08:00 – 21:00"],
+["Haldiram Style Mithai","Mithai","Main Bazaar","Clock tower ke saamne","08:00 – 21:30"],
+["Desi Ghee Sweets","Mithai","Bazaar Chowk","Mandir ke paas","08:00 – 21:00"],
+["Fresh Bakery","Bakery","Model Town","Park ke paas",D],
+["Cake Corner","Bakery","Civil Lines","Market ke andar",D],
+["New Fashion Garments","Kapde","Bazaar Chowk","Chowk ke dayen taraf",S],
+["Royal Textiles","Kapde","Main Bazaar","Bank ke peeche",S],
+["Kids Corner","Kapde","Mandi Road","Mandi gate ke paas",S],
+["Sharma Suit House","Kapde","Station Road","Phatak ke paas",S],
+["Singh Mobile Repair","Mobile","Main Bazaar","Clock tower ke peeche",S],
+["Digital World Mobiles","Mobile","Bazaar Chowk","Sunar gali ke saamne",S],
+["Mobile Care Centre","Mobile","Station Road","Bus stand ke paas",S],
+["Style Hair Salon","Salon","Model Town","Park ke saamne",S],
+["Gents Parlour","Salon","Main Bazaar","Bank ke paas",S],
+["Glow Beauty Parlour","Salon","Civil Lines","School road",S],
+["Jai Hind Hardware","Hardware","Mandi Road","Anaj mandi ke saamne",S],
+["Kumar Paint House","Hardware","GT Road","Petrol pump ke paas",S],
+["Tools and Tiles","Hardware","Station Road","Phatak ke paas",S],
+["Ram Fruit Bhandar","Sabzi-Fal","Sabzi Mandi Road","Mandi ke andar","06:00 – 20:00"],
+["Fresh Sabzi Wala","Sabzi-Fal","Model Town","Gali no. 2","06:00 – 20:00"],
+["Kisan Fal Dukaan","Sabzi-Fal","Main Bazaar","Chowk ke paas","06:00 – 20:00"],
+["Sai Electronics","Electronics","Bazaar Chowk","Clock tower ke paas",S],
+["Kumar Electricals","Electronics","Mandi Road","Mandi gate ke saamne",S],
+["Verma Jewellers","Jewellery","Sunar Gali","Bazaar Chowk ke paas",S],
+["Lakshmi Gold House","Jewellery","Main Bazaar","Bank ke saamne",S],
+["Gyan Book Depot","Stationery","Civil Lines","School ke saamne",D],
+["Student Point","Stationery","Model Town","College road",D],
+["Bata Footwear Hub","Jutte","Main Bazaar","Clock tower ke saamne",S],
+["Pind Jutti House","Jutte","Bazaar Chowk","Chowk ke paas",S],
+["Dr. Sharma Clinic","Clinic","Hospital Road","Civil hospital ke saamne","09:00 – 19:00"],
+["Sehat Child Clinic","Clinic","Model Town","Park ke peeche","10:00 – 19:00"]
+];
+/* Kisi dukaan ka asli phone ya UPI ID yahan likho (dukaan ka naam bilkul RAW wale naam jaisa).
+   phone = 91 ke saath, bina + ya space. Ek se zyada dukaan ho to comma laga ke naya line jodo. */
+const CHANGES = {
+ "Sharma Fast Food": { phone:"919800000000", upi:"apna-naam@upi" }
+};
+let SHOPS = RAW.map((r,i)=>({name:r[0],cat:r[1],area:r[2],addr:r[3],timing:r[4],
+  phone:"91980000"+String(i+1).padStart(4,"0"), upi:UPI_DEFAULT, delivery:!!DELIVERY[r[1]], ...(DELIVERY[r[1]]||{}), ...(CHANGES[r[0]]||{})}));
+/* ===================== EDIT KHATAM ===================== */
+
+const $ = s => document.querySelector(s);
+let cat = "Sab", cart = {}, cur = null, stage = 1, form = {nm:"",ad:"",utr:""};
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+document.title = APP_NAME; $("#appName").textContent = APP_NAME; $("#tagline").textContent = TAGLINE; $("#foot").textContent = FOOTER;
+
+function chips(){
+  const cats = ["Sab", ...new Set(SHOPS.map(s => s.cat))];
+  $("#chips").innerHTML = cats.map(c => `<button class="chip ${c===cat?"on":""}" data-c="${esc(c)}">${esc(c)}</button>`).join("");
+  document.querySelectorAll(".chip").forEach(b => b.onclick = () => { cat = b.dataset.c; chips(); render(); });
+}
+function render(){
+  const q = $("#q").value.trim().toLowerCase(), d = $("#delOnly").checked;
+  const res = SHOPS.map((s,i)=>({s,i})).filter(({s}) =>
+    (cat==="Sab" || s.cat===cat) && (!d || s.delivery) &&
+    (!q || (s.name+" "+s.cat+" "+s.area+" "+s.addr+" "+(s.menu||[]).map(m=>m[0]).join(" ")).toLowerCase().includes(q)));
+  $("#list").innerHTML = res.length ? res.map(({s,i}) => `
+    <article class="shop">
+      <h2>${esc(s.name)}${s.delivery?'<span class="tag">Home delivery</span>':""}</h2>
+      <div class="meta">${esc(s.cat)} · ${esc(s.area)}</div>
+      <div class="meta">📍 ${esc(s.addr)}</div>
+      <div class="meta">🕘 ${esc(s.timing)}</div>
+      <div class="acts">
+        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.name+" "+s.addr+" "+TOWN)}">Map pe dekho</a>
+        ${s.phone?`<a class="btn" href="tel:+${esc(s.phone)}">Call karo</a>`:""}
+        ${s.delivery&&s.phone?`<button class="btn fill" data-o="${i}">Order karo</button>`:""}
+      </div>
+    </article>`).join("") : `<div class="empty">Koi dukaan nahi mili. Dusra naam ya category try karo.</div>`;
+  document.querySelectorAll("[data-o]").forEach(b => b.onclick = () => openOrder(+b.dataset.o));
+}
+function openOrder(i){ cur = SHOPS[i]; cart = {}; stage = 1; form = {nm:"",ad:"",utr:""}; drawSheet(); $("#sheet").classList.add("open"); }
+function closeSheet(){ $("#sheet").classList.remove("open"); }
+$("#sheet").onclick = e => { if(e.target.id==="sheet") closeSheet(); };
+const total = () => cur.menu.reduce((t,m,k)=> t + (cart[k]||0)*m[1], 0);
+const grand = () => { const t = total(); return t ? t + cur.fee : 0; };
+
+function drawSheet(){
+  const s = cur, t = total(), g = grand();
+  const sum = `<div class="sum"><span>Samaan</span><span>₹${t}</span></div><div class="sum"><span>Delivery</span><span>${s.fee?"₹"+s.fee:"Free"}</span></div><div class="sum tot"><span>Advance dena hai</span><span>₹${g}</span></div>`;
+  let h = `<button class="x" id="cl" aria-label="Band karo">×</button><h2>${esc(s.name)}</h2>
+    <div class="meta">Delivery: ${s.fee?"₹"+s.fee:"Free"} · Kam se kam order: ₹${s.min}</div>
+    <div class="note">Cash on delivery nahi hai. Order ke liye pehle UPI se advance payment karni hogi.</div>`;
+  if(stage===1){
+    h += s.menu.map((m,k)=>`<div class="item"><div>${esc(m[0])}<div class="meta">₹${m[1]}</div></div>
+      <div class="qty"><button data-m="${k}" aria-label="Kam karo">−</button><b>${cart[k]||0}</b><button data-p="${k}" aria-label="Badhao">+</button></div></div>`).join("");
+    if(s.cat==="Dawai") h += `<div class="meta" style="margin-top:8px">Doctor ki parchi wali dawai ke liye dukaan ko call karo.</div>`;
+    h += sum + `<label for="nm">Aapka naam</label><input type="text" id="nm">
+      <label for="ad">Ghar ka pata</label><textarea id="ad" rows="2" placeholder="Gali, mohalla, landmark"></textarea>
+      <div class="note" id="err"></div><button class="btn fill" style="width:100%" id="go">Aage badho: payment</button>`;
+  } else {
+    const q = "pa="+encodeURIComponent(s.upi)+"&pn="+encodeURIComponent(s.name)+"&am="+g.toFixed(2)+"&cu=INR&tn="+encodeURIComponent(APP_NAME+" order");
+    h += sum + `<div class="meta">${esc(form.nm)} · ${esc(form.ad)}</div>
+      <label>Step 1: UPI app se ₹${g} bhejo</label>
+      <div class="pays"><a class="btn fill" href="upi://pay?${q}">UPI app kholo</a>
+        <a class="btn" href="tez://upi/pay?${q}">Google Pay</a><a class="btn" href="phonepe://pay?${q}">PhonePe</a><a class="btn" href="paytmmp://pay?${q}">Paytm</a></div>
+      <div class="meta">Ya haath se UPI ID par bhejo: <b>${esc(s.upi)}</b></div>
+      <label for="utr">Step 2: Payment ke baad UPI Transaction ID (12 ank) likho</label>
+      <input type="text" id="utr" inputmode="numeric" maxlength="12" placeholder="jaise 412345678901">
+      <div class="note" id="err"></div>
+      <button class="btn fill" style="width:100%" id="send">Order pakka karo (WhatsApp)</button>
+      <button class="btn" style="width:100%;margin-top:8px" id="back">Peeche jao</button>`;
+  }
+  $("#panel").innerHTML = h;
+  $("#cl").onclick = closeSheet;
+  if(stage===1){
+    $("#nm").value = form.nm; $("#ad").value = form.ad;
+    $("#nm").oninput = e => form.nm = e.target.value; $("#ad").oninput = e => form.ad = e.target.value;
+    document.querySelectorAll("[data-p]").forEach(b => b.onclick = () => { cart[b.dataset.p] = (cart[b.dataset.p]||0)+1; drawSheet(); });
+    document.querySelectorAll("[data-m]").forEach(b => b.onclick = () => { cart[b.dataset.m] = Math.max(0,(cart[b.dataset.m]||0)-1); drawSheet(); });
+    $("#go").onclick = () => {
+      if(!total()) return $("#err").textContent = "Pehle kuch item chuno.";
+      if(total() < s.min) return $("#err").textContent = `Kam se kam ₹${s.min} ka order chahiye.`;
+      if(!form.nm.trim() || !form.ad.trim()) return $("#err").textContent = "Naam aur pata dono bharo.";
+      stage = 2; drawSheet();
+    };
+  } else {
+    $("#utr").value = form.utr; $("#utr").oninput = e => form.utr = e.target.value.replace(/\D/g,"");
+    $("#back").onclick = () => { stage = 1; drawSheet(); };
+    $("#send").onclick = send;
+  }
+}
+function send(){
+  const s = cur, g = grand();
+  if(!s.phone) return $("#err").textContent = "Is dukaan ka WhatsApp number abhi add nahi hua hai.";
+  if(!/^\d{12}$/.test(form.utr)) return $("#err").textContent = "Transaction ID 12 ank ki hoti hai. Payment ke baad UPI app mein dekho.";
+  const lines = s.menu.map((m,k)=> cart[k] ? `• ${m[0]} × ${cart[k]} = ₹${cart[k]*m[1]}` : null).filter(Boolean);
+  const msg = `Namaste ${s.name}, ${APP_NAME} se order (ADVANCE PAID):\n${lines.join("\n")}\nSamaan: ₹${total()}\nDelivery: ${s.fee?"₹"+s.fee:"Free"}\nPaid: ₹${g} via UPI\nTransaction ID: ${form.utr}\nNaam: ${form.nm}\nPata: ${form.ad}`;
+  window.open("https://wa.me/"+s.phone+"?text="+encodeURIComponent(msg), "_blank");
+}
+$("#q").oninput = render; $("#delOnly").onchange = render;
+chips(); render(); loadCloudShops();
+</script>
+</body>
+</html>
